@@ -25,3 +25,20 @@ public class Competitor {
         this.scores = scores;
     }
 
+    public int getOverallScore() {
+        if (scores.length < 3) {
+            return 0;
+        }
+
+        int[] sortedScores = Arrays.copyOf(scores, scores.length);
+        Arrays.sort(sortedScores);
+
+        int sum = 0;
+        for (int i = 1; i < sortedScores.length - 1; i++) {
+            sum += sortedScores[i];
+        }
+
+        int average = sum / (sortedScores.length - 2);
+
+        return average;
+    }

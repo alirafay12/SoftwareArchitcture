@@ -34,3 +34,23 @@ public class CompetitorList {
         }
         return highestScore;
     }
+
+    public static void deleteCompetitor(Competitor competitor) {
+        competitors.remove(competitor);
+        FileUtility.updateCsvFile(CompetitorList.getAllCompetitors());
+    }
+
+    public static void updateCompetitor(Competitor competitor) {
+        for (Competitor c : competitors) {
+            if (c.getCompetitorNumber() == competitor.getCompetitorNumber()) {
+                c.setName(competitor.getName());
+                c.setEmail(competitor.getEmail());
+                c.setCountry(competitor.getCountry());
+                c.setDateOfBirth(competitor.getDateOfBirth());
+                c.setCategory(competitor.getCategory());
+                c.setLevel(competitor.getLevel());
+                break;
+            }
+        }
+    }
+}

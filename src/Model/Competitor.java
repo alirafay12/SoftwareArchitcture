@@ -62,3 +62,7 @@ public class Competitor {
 
         return details.toString();
     }
+
+    public String getShortDetails() {
+        return "CN " + competitorNumber + " (" + getInitials() + ") has an overall score of " + getOverallScore();
+    }

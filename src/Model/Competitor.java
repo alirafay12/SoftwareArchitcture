@@ -42,3 +42,23 @@ public class Competitor {
 
         return average;
     }
+    public String getFullDetails() {
+        StringBuilder details = new StringBuilder();
+        details.append("model.Competitor number ").append(competitorNumber).append(", name ").append(name).append(".\n");
+        details.append("Email: ").append(email).append("\n");
+        details.append("Country: ").append(country).append("\n");
+        details.append("Date of Birth: ").append(dateOfBirth).append("\n");
+        details.append(name).append(" is a ").append(category).append(" in the ").append(level).append(" category.\n");
+        details.append("Received these scores: ");
+
+        for (int i = 0; i < scores.length; i++) {
+            details.append(scores[i]);
+            if (i < scores.length - 1) {
+                details.append(", ");
+            }
+        }
+
+        details.append("\nThis gives them an overall score of ").append(getOverallScore()).append(".");
+
+        return details.toString();
+    }

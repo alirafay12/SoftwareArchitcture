@@ -66,3 +66,16 @@ public class Competitor {
     public String getShortDetails() {
         return "CN " + competitorNumber + " (" + getInitials() + ") has an overall score of " + getOverallScore();
     }
+
+    private String getInitials() {
+        StringBuilder initials = new StringBuilder();
+        String[] nameParts = name.split(" ");
+
+        for (String part : nameParts) {
+            if (!part.isEmpty()) {
+                initials.append(part.charAt(0));
+            }
+        }
+
+        return initials.toString().toUpperCase();
+    }

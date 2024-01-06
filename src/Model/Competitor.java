@@ -106,3 +106,30 @@ public class Competitor {
     public String getLevel() {
         return level;
     }
+
+    public void setCompetitorNumber(int competitorNumber) {
+        this.competitorNumber = competitorNumber;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }

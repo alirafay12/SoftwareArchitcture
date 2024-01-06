@@ -19,3 +19,18 @@ public class CompetitorList {
         }
         return null;
     }
+
+    public static ArrayList<Competitor> getAllCompetitors() {
+        return competitors;
+    }
+
+    public static double getHighestOverallScore() {
+        double highestScore = Double.MIN_VALUE;
+        for (Competitor competitor : competitors) {
+            double overallScore = competitor.getOverallScore();
+            if (overallScore > highestScore) {
+                highestScore = overallScore;
+            }
+        }
+        return highestScore;
+    }

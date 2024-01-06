@@ -133,3 +133,18 @@ public class Competitor {
     public void setLevel(String level) {
         this.level = level;
     }
+
+    public List<Integer> getScores() {
+        List<Integer> sc = new ArrayList<>();
+        for (int i = 0; i < scores.length; i++) {
+            sc.add(scores[i]);
+        }
+        return sc;
+    }
+
+    public void setScores(List<Integer> scores) {
+        for (int i = 0; i < scores.size(); i++) {
+            this.scores[i] = scores.get(i);
+        }
+    }
+}

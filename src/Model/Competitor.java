@@ -79,3 +79,30 @@ public class Competitor {
 
         return initials.toString().toUpperCase();
     }
+
+    public int getCompetitorNumber() {
+        return competitorNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public String getCountry() {
+        return country;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getLevel() {
+        return level;
+    }

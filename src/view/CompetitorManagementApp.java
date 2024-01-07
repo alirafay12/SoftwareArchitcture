@@ -320,4 +320,33 @@ public class CompetitorManagementApp extends Application {
             update();
         });
 
+        deleteButton.setOnAction(e -> {
+            Competitor selectedCompetitor = table.getSelectionModel().getSelectedItem();
+            if (selectedCompetitor != null) {
+                competitorData.remove(selectedCompetitor);
+                CompetitorList.deleteCompetitor(selectedCompetitor);
+            }
+        });
+
+        HBox searchBox = new HBox(10, searchLabel, searchField, searchButton);
+        grid.add(searchBox, 0, 0);
+        grid.add(table, 0, 1);
+
+        // Arrange components in the grid
+        if(role.equals("STAFF")) {
+            HBox buttonBox = new HBox(10, updateButton, deleteButton, addScoresButton);
+            HBox detailsBox = new HBox(10, showFullDetailsButton, showShortDetailsButton, getReportButton,savenclose);
+            grid.add(buttonBox, 0, 2);
+            grid.add(detailsBox, 0, 3);
+        } else if(role.equals("REFEREE")) {
+            HBox buttonBox = new HBox(10, addScoresButton);
+            HBox detailsBox = new HBox(10, showFullDetailsButton, showShortDetailsButton);
+            grid.add(buttonBox, 0, 2);
+            grid.add(detailsBox, 0, 3);
+        } else {
+            HBox detailsBox = new HBox(10, showFullDetailsButton, showShortDetailsButton);
+            grid.add(detailsBox, 0, 2);
+        }
+        primaryStage.show();
+    }
 

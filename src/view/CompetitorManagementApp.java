@@ -226,3 +226,34 @@ public class CompetitorManagementApp extends Application {
                 showAlert("Error writing the report to a file: " + ex.getMessage());
             }
         });
+
+        // Search components
+        Label searchLabel = new Label("Competitor Number:");
+        TextField searchField = new TextField();
+        Button searchButton = new Button("Search Competitor");
+
+        // Set up table columns
+        TableColumn<Competitor, Integer> numberCol = new TableColumn<>("Competitor Number");
+        numberCol.setCellValueFactory(new PropertyValueFactory<>("competitorNumber"));
+        numberCol.setMinWidth(150);
+
+        TableColumn<Competitor, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameCol.setMinWidth(150);
+
+        TableColumn<Competitor, String> emailCol = new TableColumn<>("Email");
+        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        emailCol.setMinWidth(200);
+
+        TableColumn<Competitor, String> countryCol = new TableColumn<>("Country");
+        countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+        countryCol.setMinWidth(200);
+
+
+        TableColumn<Competitor, String> categoryCol = new TableColumn<>("Category");
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        categoryCol.setMinWidth(100);
+
+        TableColumn<Competitor, String> levelCol = new TableColumn<>("Level");
+        levelCol.setCellValueFactory(new PropertyValueFactory<>("level"));
+        levelCol.setMinWidth(100);

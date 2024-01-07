@@ -294,4 +294,30 @@ public class CompetitorManagementApp extends Application {
                 detailsDialog.showAndWait();
             }
         });
+        showShortDetailsButton.setOnAction(e -> {
+            Competitor selectedCompetitor = table.getSelectionModel().getSelectedItem();
+            if (selectedCompetitor != null) {
+                // Display the short details of the selected competitor in the dialog
+                detailsTextArea.setText(selectedCompetitor.getShortDetails());
+                detailsDialog.showAndWait();
+            }
+        });
+
+        // Load data from CompetitorList
+        competitorData.addAll(CompetitorList.getAllCompetitors());
+
+        // Handle search button click
+        searchButton.setOnAction(e -> {
+            String competitorNumber = searchField.getText();
+            Competitor foundCompetitor = findCompetitorByNumber(Integer.parseInt(competitorNumber));
+            if (foundCompetitor != null) {
+                table.getSelectionModel().select(foundCompetitor);
+                table.scrollTo(foundCompetitor);
+            }
+        });
+
+        updateButton.setOnAction(e -> {
+            update();
+        });
+
 

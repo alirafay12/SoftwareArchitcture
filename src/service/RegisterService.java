@@ -33,3 +33,9 @@ public class RegisterService {
         return "Success: model.Competitor registered successfully.";
     }
 
+    private static boolean isAnyFieldOmitted(Competitor competitor) {
+        return competitor.getName() == null || competitor.getName().isEmpty()
+                || competitor.getEmail() == null || competitor.getEmail().isEmpty()|| competitor.getCountry().isEmpty()
+                || competitor.getDateOfBirth() == null
+                || competitor.getCategory() == null || competitor.getLevel() == null;
+    }

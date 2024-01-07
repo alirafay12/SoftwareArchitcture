@@ -167,7 +167,13 @@ public class CompetitorManagementApp extends Application {
                 showAlert("Error writing the report to a file: " + ex.getMessage());
             }
 
+
+
+
+
+
         });
+
 
         Button getReportButton = new Button("Get Report");
 
@@ -203,6 +209,7 @@ public class CompetitorManagementApp extends Application {
                 }
             }
 
+            // Calculate the average score
             double averageScore = (totalScores > 0) ? (double) totalScores / competitors.size() : 0.0;
 
             // Create the report message
@@ -278,6 +285,12 @@ public class CompetitorManagementApp extends Application {
         ButtonType closeButton = new ButtonType("Close");
         detailsDialog.getDialogPane().getButtonTypes().addAll(closeButton);
 
+
+
+
+
+
+
         // Create a text area for displaying details
         TextArea detailsTextArea = new TextArea();
         detailsTextArea.setEditable(false);
@@ -294,6 +307,7 @@ public class CompetitorManagementApp extends Application {
                 detailsDialog.showAndWait();
             }
         });
+
         showShortDetailsButton.setOnAction(e -> {
             Competitor selectedCompetitor = table.getSelectionModel().getSelectedItem();
             if (selectedCompetitor != null) {
@@ -349,6 +363,7 @@ public class CompetitorManagementApp extends Application {
         }
         primaryStage.show();
     }
+
     private Competitor findCompetitorByNumber(int competitorNumber) {
         for (Competitor competitor : competitorData) {
             if (competitor.getCompetitorNumber() == competitorNumber) {
@@ -357,6 +372,12 @@ public class CompetitorManagementApp extends Application {
         }
         return null;
     }
+
+
+
+
+
+
 
     private void update() {
         Competitor selectedCompetitor = table.getSelectionModel().getSelectedItem();
@@ -421,15 +442,18 @@ public class CompetitorManagementApp extends Application {
                 return null;
             });
 
-
-            public static void showAlert(String message) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Message");
-                alert.setHeaderText(null);
-                alert.setContentText(message);
-                alert.getButtonTypes().setAll(new ButtonType("OK"));
-
-                alert.showAndWait();
-            }
+            // Show the dialog and wait for the user response
+            dialog.showAndWait();
         }
+    }
 
+    public static void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Message");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.getButtonTypes().setAll(new ButtonType("OK"));
+
+        alert.showAndWait();
+    }
+}

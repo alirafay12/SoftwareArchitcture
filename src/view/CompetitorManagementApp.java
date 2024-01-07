@@ -422,3 +422,14 @@ public class CompetitorManagementApp extends Application {
             });
 
 
+            public static void showAlert(String message) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Message");
+                alert.setHeaderText(null);
+                alert.setContentText(message);
+                alert.getButtonTypes().setAll(new ButtonType("OK"));
+
+                alert.showAndWait();
+            }
+        }
+

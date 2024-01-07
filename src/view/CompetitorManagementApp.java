@@ -358,4 +358,67 @@ public class CompetitorManagementApp extends Application {
         return null;
     }
 
+    private void update() {
+        Competitor selectedCompetitor = table.getSelectionModel().getSelectedItem();
+        if (selectedCompetitor != null) {
+            // Create a custom dialog for editing competitor details
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("Edit Competitor Details");
+            dialog.setHeaderText("Editing Competitor " + selectedCompetitor.getCompetitorNumber());
+
+            // Set the button types (e.g., "Update" and "Cancel")
+            ButtonType updateButtonType = new ButtonType("Update", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(updateButtonType, ButtonType.CANCEL);
+
+            // Create a GridPane to layout the text fields
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+            // Create text fields for editing attributes
+            TextField nameField = new TextField(selectedCompetitor.getName());
+            TextField emailField = new TextField(selectedCompetitor.getEmail());
+            TextField dobField = new TextField(selectedCompetitor.getDateOfBirth());
+            TextField categoryField = new TextField(selectedCompetitor.getCategory());
+            TextField levelField = new TextField(selectedCompetitor.getLevel());
+
+            // Add text fields to the GridPane
+            grid.add(new Label("Name:"), 0, 0);
+            grid.add(nameField, 1, 0);
+            grid.add(new Label("Email:"), 0, 1);
+            grid.add(emailField, 1, 1);
+            grid.add(new Label("Date of Birth:"), 0, 2);
+            grid.add(dobField, 1, 2);
+            grid.add(new Label("Category:"), 0, 3);
+            grid.add(categoryField, 1, 3);
+            grid.add(new Label("Level:"), 0, 4);
+            grid.add(levelField, 1, 4);
+
+            dialog.getDialogPane().setContent(grid);
+
+            // Request focus on the name field by default
+            Platform.runLater(() -> nameField.requestFocus());
+
+            // Convert the result to a string when the Update button is clicked
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == updateButtonType) {
+                    // Update the selected competitor's data with the new values
+                    selectedCompetitor.setName(nameField.getText());
+                    selectedCompetitor.setDateOfBirth(dobField.getText());
+                    selectedCompetitor.setCategory(categoryField.getText());
+                    selectedCompetitor.setLevel(levelField.getText());
+
+                    String output = RegisterService.registerCompetitor(selectedCompetitor, true);
+                    showAlert(output);
+                    if (output.contains("Success:")) {
+                        CompetitorList.updateCompetitor(selectedCompetitor);
+                        FileUtility.updateCsvFile(CompetitorList.getAllCompetitors());
+                    }
+                    table.refresh();
+                    return "Updated";
+                }
+                return null;
+            });
+
 

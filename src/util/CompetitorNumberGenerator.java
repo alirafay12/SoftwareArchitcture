@@ -23,5 +23,12 @@ public class CompetitorNumberGenerator {
         return number;
     }
 
-
+    private static void updateNextCompetitorNumberInFile(int number) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/index.txt"))) {
+            writer.write(Integer.toString(number));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 

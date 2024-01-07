@@ -9,3 +9,19 @@ public class CompetitorNumberGenerator {
         updateNextCompetitorNumberInFile(generatedNumber + 1);
         return generatedNumber;
     }
+
+    private static int readNextCompetitorNumberFromFile() {
+        int number = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/index.txt"))) {
+            String line = reader.readLine();
+            if (line != null) {
+                number = Integer.parseInt(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return number;
+    }
+
+
+

@@ -169,4 +169,37 @@ public class CompetitorManagementApp extends Application {
 
         });
 
+        Button getReportButton = new Button("Get Report");
+
+        getReportButton.setOnAction(e -> {
+            List<Competitor> competitors = CompetitorList.getAllCompetitors();
+
+            if (competitors.isEmpty()) {
+                showAlert("No competitors to generate a report.");
+                return;
+            }
+
+            // Calculate the highest overall score and corresponding competitor
+            int highestOverallScore = -1;
+            Competitor highestScoringCompetitor = null;
+            int totalScores = 0;
+            int maxScore = Integer.MIN_VALUE;
+            int minScore = Integer.MAX_VALUE;
+            Map<Integer, Integer> frequencyReport = new HashMap<>();
+
+            for (Competitor competitor : competitors) {
+                List<Integer> scores = competitor.getScores();
+                if (!scores.isEmpty()) {
+                    int overallScore = competitor.getOverallScore();
+                    totalScores += scores.size();
+                    maxScore = Math.max(maxScore, Collections.max(scores));
+                    minScore = Math.min(minScore, Collections.min(scores));
+                    frequencyReport.compute(overallScore, (key, value) -> value == null ? 1 : value + 1);
+
+                    if (overallScore > highestOverallScore) {
+                        highestOverallScore = overallScore;
+                        highestScoringCompetitor = competitor;
+                    }
+                }
+            }
 

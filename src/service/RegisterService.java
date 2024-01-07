@@ -51,3 +51,31 @@ public class RegisterService {
                 .anyMatch(existingCompetitor -> existingCompetitor.getEmail().equals(competitor.getEmail())
                         && !existingCompetitor.getCategory().equals(competitor.getCategory()));
     }
+
+
+    private static boolean isAgeIncompatibleWithLevel(Competitor competitor) {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Adjust the pattern as needed
+        String dateOfBirthString = competitor.getDateOfBirth();
+
+        try {
+            LocalDate birthDate = LocalDate.parse(dateOfBirthString, dateFormatter);
+
+            // Calculate the age of the competitor based on the date of birth
+            LocalDate currentDate = LocalDate.now();
+            int age = Period.between(birthDate, currentDate).getYears();
+
+            // Check the level and compare with age restrictions
+            if (competitor.getLevel().equals("1") && age >= 18) {
+                return true; // Incompatible age for Level 1
+            } else if (competitor.getLevel().equals("2") && (age < 18 || age >= 30)) {
+                return true; // Incompatible age for Level 2
+            } else if (competitor.getLevel().equals("3") && age < 30) {
+                return true; // Incompatible age for Level 3
+            }
+        } catch (DateTimeParseException e) {
+            throw new RuntimeException("Invalid Date");
+        }
+
+        return false; // Age is compatible with the selected level
+    }
+}

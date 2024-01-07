@@ -203,3 +203,26 @@ public class CompetitorManagementApp extends Application {
                 }
             }
 
+            double averageScore = (totalScores > 0) ? (double) totalScores / competitors.size() : 0.0;
+
+            // Create the report message
+            String reportMessage = "Report:\n\n";
+            reportMessage += "Highest Scoring Competitor:\n" + highestScoringCompetitor.getFullDetails() + "\n\n";
+            reportMessage += "Average Score: " + String.format("%.2f", averageScore) + "\n";
+            reportMessage += "Max Score: " + maxScore + "\n";
+            reportMessage += "Min Score: " + minScore + "\n";
+            reportMessage += "Frequency Report:\n";
+            for (Map.Entry<Integer, Integer> entry : frequencyReport.entrySet()) {
+                reportMessage += entry.getKey() + " points: " + entry.getValue() + " times\n";
+            }
+
+            // Display the report in a dialog
+            showAlert(reportMessage);
+
+            // Write the report to a report.txt file
+            try (PrintWriter writer = new PrintWriter("src/report.txt")) {
+                writer.println(reportMessage);
+            } catch (FileNotFoundException ex) {
+                showAlert("Error writing the report to a file: " + ex.getMessage());
+            }
+        });

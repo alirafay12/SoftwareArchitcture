@@ -278,5 +278,20 @@ public class CompetitorManagementApp extends Application {
         ButtonType closeButton = new ButtonType("Close");
         detailsDialog.getDialogPane().getButtonTypes().addAll(closeButton);
 
+        // Create a text area for displaying details
+        TextArea detailsTextArea = new TextArea();
+        detailsTextArea.setEditable(false);
+        detailsTextArea.setWrapText(true);
 
+        // Add the details text area to the dialog
+        detailsDialog.getDialogPane().setContent(detailsTextArea);
+
+        showFullDetailsButton.setOnAction(e -> {
+            Competitor selectedCompetitor = table.getSelectionModel().getSelectedItem();
+            if (selectedCompetitor != null) {
+                // Display the full details of the selected competitor in the dialog
+                detailsTextArea.setText(selectedCompetitor.getFullDetails());
+                detailsDialog.showAndWait();
+            }
+        });
 

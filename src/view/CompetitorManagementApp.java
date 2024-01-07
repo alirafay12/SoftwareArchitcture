@@ -349,4 +349,13 @@ public class CompetitorManagementApp extends Application {
         }
         primaryStage.show();
     }
+    private Competitor findCompetitorByNumber(int competitorNumber) {
+        for (Competitor competitor : competitorData) {
+            if (competitor.getCompetitorNumber() == competitorNumber) {
+                return competitor;
+            }
+        }
+        return null;
+    }
+
 

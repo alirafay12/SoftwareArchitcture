@@ -257,3 +257,26 @@ public class CompetitorManagementApp extends Application {
         TableColumn<Competitor, String> levelCol = new TableColumn<>("Level");
         levelCol.setCellValueFactory(new PropertyValueFactory<>("level"));
         levelCol.setMinWidth(100);
+
+        // Set up the table
+        table.getColumns().addAll(numberCol, nameCol, emailCol,countryCol, categoryCol, levelCol);
+        table.setItems(competitorData);
+
+        // Update and Delete buttons
+        Button updateButton = new Button("Update Competitor Details");
+        Button deleteButton = new Button("Delete Competitor");
+
+        Button showFullDetailsButton = new Button("Show Full Details");
+        Button showShortDetailsButton = new Button("Show Short Details");
+
+        // Create a dialog for displaying competitor details
+        Dialog<String> detailsDialog = new Dialog<>();
+        detailsDialog.setTitle("Competitor Details");
+        detailsDialog.setHeaderText("Selected Competitor Details");
+
+        // Set the button types (e.g., "Close")
+        ButtonType closeButton = new ButtonType("Close");
+        detailsDialog.getDialogPane().getButtonTypes().addAll(closeButton);
+
+
+

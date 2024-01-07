@@ -39,3 +39,15 @@ public class RegisterService {
                 || competitor.getDateOfBirth() == null
                 || competitor.getCategory() == null || competitor.getLevel() == null;
     }
+
+    private static boolean isCompetitorAlreadyRegistered(Competitor competitor) {
+        return CompetitorList.getAllCompetitors().stream()
+                .anyMatch(existingCompetitor -> existingCompetitor.getEmail().equals(competitor.getEmail())
+                        && existingCompetitor.getCategory().equals(competitor.getCategory()));
+    }
+
+    private static boolean isCompetitorWithEmailAndDifferentCategory(Competitor competitor) {
+        return CompetitorList.getAllCompetitors().stream()
+                .anyMatch(existingCompetitor -> existingCompetitor.getEmail().equals(competitor.getEmail())
+                        && !existingCompetitor.getCategory().equals(competitor.getCategory()));
+    }

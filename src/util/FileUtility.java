@@ -38,3 +38,46 @@ public class FileUtility {
         }
     }
 
+    public static void updateCsvFile(List<Competitor> competitors) {
+        try {
+            BufferedWriter trackWriter = new BufferedWriter(new FileWriter("src/TrackEventCompetitors.csv"));
+            BufferedWriter fieldWriter = new BufferedWriter(new FileWriter("src/FieldEventCompetitors.csv"));
+            for (Competitor competitor : competitors) {
+                StringBuilder csvLine = new StringBuilder();
+
+                csvLine.append(competitor.getCompetitorNumber()).append(",");
+                csvLine.append(competitor.getName()).append(",");
+                csvLine.append(competitor.getEmail()).append(",");
+                csvLine.append(competitor.getCountry()).append(",");
+                csvLine.append(competitor.getDateOfBirth()).append(",");
+                csvLine.append(competitor.getCategory()).append(",");
+                csvLine.append(competitor.getLevel()).append(",");
+                if (competitor instanceof TrackEventCompetitor) {
+                    csvLine.append(((TrackEventCompetitor) competitor).getDistance()).append(",");
+                } else if (competitor instanceof FieldEventCompetitor) {
+                    csvLine.append(((FieldEventCompetitor) competitor).getFieldEvent()).append(",");
+                }
+
+                for (Integer score : competitor.getScores()) {
+                    csvLine.append(score).append(",");
+                }
+
+                // Remove the trailing comma and write the line to the file
+                csvLine.deleteCharAt(csvLine.length() - 1);  // Remove the last comma
+                if (competitor instanceof TrackEventCompetitor) {
+                    trackWriter.write(csvLine.toString());
+                    trackWriter.newLine();  // Move to the next line
+                } else {
+                    fieldWriter.write(csvLine.toString());
+                    fieldWriter.newLine();  // Move to the next line
+                }
+            }
+            trackWriter.close();
+            fieldWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+

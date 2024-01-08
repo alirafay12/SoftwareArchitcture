@@ -82,3 +82,57 @@ public class CompetitorRegistrationApp extends Application {
         categoryChoice.setValue("Novice"); // Default selection
         GridPane.setConstraints(categoryChoice, 1, 7);
 
+        Label levelLabel = new Label("Level:");
+        GridPane.setConstraints(levelLabel, 0, 8);
+        ComboBox<String> levelChoice = new ComboBox<>();
+        levelChoice.getItems().addAll("1", "2", "3"); // Add more levels as needed
+        levelChoice.setValue("1"); // Default selection
+        GridPane.setConstraints(levelChoice, 1, 8);
+
+        Button registerButton = new Button("Register Competitor");
+        GridPane.setConstraints(registerButton, 1, 9);
+        registerButton.setOnAction(e -> {
+            try {
+
+
+                // Perform registration based on the user's selections
+                String selectedEvent = eventChoice.getValue();
+                if (selectedEvent.equals("Track Event")) {
+                    String distance = distanceField.getText();
+                    String competitorName = nameField.getText();
+                    String competitorEmail = emailField.getText();
+                    String country=countryField.getText().toString();
+                    String dob = dobPicker.getValue().toString();
+                    String selectedCategory = categoryChoice.getValue();
+                    String selectedLevel = levelChoice.getValue();
+
+                    int[] scores = new int[10];
+                    TrackEventCompetitor trackEventCompetitor = new TrackEventCompetitor(CompetitorNumberGenerator.generateNextCompetitorNumber(), competitorName, competitorEmail,country, dob, selectedCategory, selectedLevel, scores, Integer.valueOf(distance));
+                    String output = RegisterService.registerCompetitor(trackEventCompetitor, false);
+                    showAlert(output);
+                    if (output.contains("Success:")) {
+                        CompetitorList.addCompetitor(trackEventCompetitor);
+                        FileUtility.updateCsvFile(CompetitorList.getAllCompetitors());
+                    }
+                } else if (selectedEvent.equals("Field Event")) {
+                    String competitorName = nameField.getText();
+                    String competitorEmail = emailField.getText();
+                    String dob = dobPicker.getValue().toString();
+                    String country=countryField.getText().toString();
+                    String selectedCategory = categoryChoice.getValue();
+                    String selectedLevel = levelChoice.getValue();
+                    String selectedFieldEvent = fieldEventChoice.getValue(); // Get Field Event
+
+                    int[] scores = new int[10];
+                    FieldEventCompetitor fieldEventCompetitor = new FieldEventCompetitor(CompetitorNumberGenerator.generateNextCompetitorNumber(), competitorName, competitorEmail,country, dob, selectedCategory, selectedLevel, scores, FieldEvent.valueOf(selectedFieldEvent));
+                    String output = RegisterService.registerCompetitor(fieldEventCompetitor, false);
+                    showAlert(output);
+                    if (output.contains("Success:")) {
+                        CompetitorList.addCompetitor(fieldEventCompetitor);
+                        FileUtility.updateCsvFile(CompetitorList.getAllCompetitors());
+                    }
+                }
+            } catch (Exception ex) {
+                showAlert("Error Occurred! Try again with proper values!");
+            }
+        });

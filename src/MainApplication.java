@@ -40,3 +40,14 @@ public class MainApplication extends Application {
         VBox layout = new VBox();
         layout.getChildren().addAll(registerButton, staffButton, refereeButton, competitorButton);
 
+        Scene scene = new Scene(layout, 300, 280);
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+    }
+
+    private void openCompetitorRegistration() {
+        CompetitorRegistrationApp registrationApp = new CompetitorRegistrationApp();
+        registrationApp.start(new Stage());
+    }
+

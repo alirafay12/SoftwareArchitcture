@@ -38,6 +38,37 @@ public class FileUtility {
         }
     }
 
+    public static void readFieldEventCompetitors() {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/FieldEventCompetitors.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length >= 8) {
+                    int competitorNumber = Integer.parseInt(data[0].trim());
+                    String name = data[1].trim();
+                    String email = data[2].trim();
+                    String country = data[3].trim();
+                    String dateOfBirth = data[4].trim();
+                    String category = data[5].trim();
+                    String level = data[6].trim();
+                    FieldEvent fieldEvent = FieldEvent.valueOf(data[7].trim());
+
+                    int[] scores = new int[data.length - 8];
+                    int counter = 8;
+                    for (int i = 0; i < scores.length; i++) {
+                        scores[i] = Integer.parseInt(data[counter].trim());
+                        counter++;
+                    }
+
+                    FieldEventCompetitor competitor = new FieldEventCompetitor(competitorNumber, name, email,country, dateOfBirth, category, level, scores, fieldEvent);
+                    CompetitorList.addCompetitor(competitor);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void updateCsvFile(List<Competitor> competitors) {
         try {
             BufferedWriter trackWriter = new BufferedWriter(new FileWriter("src/TrackEventCompetitors.csv"));
@@ -79,5 +110,3 @@ public class FileUtility {
         }
     }
 }
-
-

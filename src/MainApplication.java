@@ -10,7 +10,6 @@ import view.CompetitorRegistrationApp;
 public class MainApplication extends Application {
     private static final String STAFF_PASSWORD = "staff"; // Replace with your actual password
 
-
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Competitor Application");
@@ -50,6 +49,7 @@ public class MainApplication extends Application {
         CompetitorRegistrationApp registrationApp = new CompetitorRegistrationApp();
         registrationApp.start(new Stage());
     }
+
     private void openCompetitorManagement(String role) {
         CompetitorManagementApp managementApp = new CompetitorManagementApp(role);
         managementApp.start(new Stage());
@@ -76,6 +76,7 @@ public class MainApplication extends Application {
             }
         });
     }
+
     private void showIncorrectPasswordDialog() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Incorrect Password");
@@ -90,5 +91,3 @@ public class MainApplication extends Application {
         launch(args);
     }
 }
-
-

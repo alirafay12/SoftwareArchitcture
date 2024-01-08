@@ -136,3 +136,33 @@ public class CompetitorRegistrationApp extends Application {
                 showAlert("Error Occurred! Try again with proper values!");
             }
         });
+
+
+        eventChoice.setOnAction(e -> {
+            if (eventChoice.getValue().equals("Track Event")) {
+                grid.getChildren().removeAll(distanceLabel, distanceField);
+                grid.getChildren().removeAll(fieldEventLabel, fieldEventChoice);
+                grid.add(distanceLabel, 0, 2);
+                grid.add(distanceField, 1, 2);
+            } else {
+                grid.getChildren().removeAll(distanceLabel, distanceField);
+                grid.add(fieldEventLabel, 0, 2);
+                grid.add(fieldEventChoice, 1, 2);
+            }
+        });
+
+        grid.getChildren().addAll(titleLabel, eventLabel, eventChoice, distanceLabel, distanceField, nameLabel, nameField, emailLabel, emailField,countryLabel,countryField, dobLabel, dobPicker, categoryLabel, categoryChoice, levelLabel, levelChoice, registerButton);
+
+        primaryStage.show();
+    }
+
+    public static void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Message");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.getButtonTypes().setAll(new ButtonType("OK"));
+
+        alert.showAndWait();
+    }
+}

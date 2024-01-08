@@ -50,4 +50,31 @@ public class MainApplication extends Application {
         CompetitorRegistrationApp registrationApp = new CompetitorRegistrationApp();
         registrationApp.start(new Stage());
     }
+    private void openCompetitorManagement(String role) {
+        CompetitorManagementApp managementApp = new CompetitorManagementApp(role);
+        managementApp.start(new Stage());
+    }
+
+    private void showStaffPasswordDialog() {
+        TextInputDialog passwordDialog = new TextInputDialog();
+        passwordDialog.setTitle("Staff Password");
+        passwordDialog.setHeaderText("Enter 'staff' as Password:");
+        passwordDialog.setContentText("Password:");
+
+        // Set placeholder text for the password field
+        passwordDialog.getEditor().setPromptText("Password is 'staff'");
+
+        // Show the dialog and wait for the result
+        passwordDialog.showAndWait().ifPresent(password -> {
+            if (password.equals(STAFF_PASSWORD)) {
+                openCompetitorManagement("STAFF");
+            } else {
+                // Incorrect password handling, show a separate dialog
+                showIncorrectPasswordDialog();
+                showStaffPasswordDialog();
+
+            }
+        });
+    }
+
 

@@ -82,6 +82,8 @@ public class CompetitorRegistrationApp extends Application {
         categoryChoice.setValue("Novice"); // Default selection
         GridPane.setConstraints(categoryChoice, 1, 7);
 
+
+
         Label levelLabel = new Label("Level:");
         GridPane.setConstraints(levelLabel, 0, 8);
         ComboBox<String> levelChoice = new ComboBox<>();
@@ -136,7 +138,6 @@ public class CompetitorRegistrationApp extends Application {
                 showAlert("Error Occurred! Try again with proper values!");
             }
         });
-
 
         eventChoice.setOnAction(e -> {
             if (eventChoice.getValue().equals("Track Event")) {

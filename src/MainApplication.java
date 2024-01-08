@@ -76,5 +76,19 @@ public class MainApplication extends Application {
             }
         });
     }
+    private void showIncorrectPasswordDialog() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Incorrect Password");
+        alert.setHeaderText("Incorrect staff password");
+        alert.setContentText("Please enter the correct password.");
+        alert.showAndWait();
+    }
+
+    public static void main(String[] args) {
+        FileUtility.readTrackEventCompetitors();
+        FileUtility.readFieldEventCompetitors();
+        launch(args);
+    }
+}
 
 
